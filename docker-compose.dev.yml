@@ -1,0 +1,17 @@
+services:
+  nginx:
+    ports:
+      - "8080:80"
+  node-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+        DATABASE_URL: postgresql://postgres:test101@postgres:5432/library?schema=public
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:test101@postgres:5432/library?schema=public
+    command: npm run start
+  postgres:
+    ports:
+      - "5432:5432"
